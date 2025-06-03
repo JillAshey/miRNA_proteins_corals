@@ -1,0 +1,231 @@
+---
+title: "BLAST"
+author: "Jill Ashey"
+date: "2025-04-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+```
+
+Looking at BLAST results. Blasted cnidarian proteomes against human and plant miRNA biogenesis proteins. 
+```{r}
+# List all your BLAST result files
+blast_files <- list.files(path = "../output/blast/", pattern = "_vs_miRNA_biogenesis.txt$", full.names = TRUE)
+
+# Loop through the files and read them
+blast_data <- lapply(blast_files, function(file) {
+  # Read in assuming standard BLAST output with tab-delim
+  df <- read.table(file, header = FALSE, sep = "\t", stringsAsFactors = FALSE)
+  
+  # Extract species code from filename
+  species <- str_extract(basename(file), "^[^_]+")  # grabs XXX before _vs
+  
+  # Add species column
+  df$Species <- species
+  
+  return(df)
+})
+
+# Combine all into one dataframe
+blast_all <- bind_rows(blast_data)
+
+colnames(blast_all) <- c("QuerySeq", "Subject", "Identity", "AlignLength", "Mismatches", 
+                         "GapOpenings", "QStart", "QEnd", "SStart", "SEnd", "EValue", "Bitscore", "Species")
+```
+
+Add ref sequence information to df 
+```{r}
+# Create a dataframe with annotations
+annotations_df <- data.frame(
+  QuerySeq_sub = c("Q9NRR4", "Q9UPY3", "Q9SP32", "Q8WYQ5", "O04492", "Q9BXP5", "Q9ZVD0", "Q9HAV4", 
+               "Q0WP44", "Q5T8I9", "Q9C5Q8", "Q9UL18", "Q9UKV8", "O04379", "Q9ZVD5"),
+  Function = c(
+    "Human: RNase III – primary cleavage of pri-miRNA (Drosha)",
+    "Human: RNase III — cleaves pre-miRNA (Dicer)",
+    "Plant: RNase III — cleaves pre-miRNA (DCL1)",
+    "Human: miRNA microprocessor co-factor / Dicer partner — dsRNA binding protein (DGCR8 / Pasha)",
+    "Plant: miRNA microprocessor co-factor / Dicer partner — dsRNA binding protein (HYL1)",
+    "Humann: Zinc finger co-factor for DCL1-HYL1 complex (ARS2)",
+    "Plant: Zinc finger co-factor for DCL1-HYL1 complex (Serrate)",
+    "Human: Nuclear export of pre-miRNA or miRNA (Exportin-5)",
+    "Plant: Nuclear export of pre-miRNA or miRNA (Hasty)",
+    "Human: Methyltransferase — 2′-O-methylation of miRNAs (HENM1; for piRNAs)",
+    "Plant: Methyltransferase — 2′-O-methylation of miRNAs (Hen1)",
+    "Human: miRNA effector — guides RISC (AGO1)",
+    "Human: miRNA effector — guides RISC (AGO2)",
+    "Plant: miRNA effector — guides RISC (AGO1)",
+    "Plant: miRNA effector — guides RISC (AGO4)"
+  ),
+  stringsAsFactors = FALSE
+)
+
+# Extract QuerySeq from V1 column in blast_all (strip out unnecessary prefixes and suffixes)
+blast_all$QuerySeq_sub <- sub("sp\\|([A-Za-z0-9]+)\\|.*", "\\1", blast_all$QuerySeq)
+
+# Perform a left join to add annotations
+blast_all_annot <- left_join(blast_all, annotations_df, by = "QuerySeq_sub") %>%
+  na.omit()
+
+# Check the result
+head(blast_all_annot)
+```
+
+Add Group information (ie coral, cnidarian, etc)
+```{r}
+blast_all_annot <- blast_all_annot %>%
+  mutate(Group = case_when(
+    startsWith(Subject, "Acrop") ~ "Coral",
+    startsWith(Subject, "Anthopleura") ~ "Cnidarian",
+    startsWith(Subject, "protein|") ~ "Coral", 
+    startsWith(Subject, "Amphimedon") ~ "Sponge",
+    startsWith(Subject, "Anemonia") ~ "Cnidarian",
+    startsWith(Subject, "Ephydatia") ~ "Sponge",
+    startsWith(Subject, "Fungia") ~ "Coral", 
+    startsWith(Subject, "Gorgonia") ~ "Cnidarian",
+    startsWith(Subject, "Hydra") ~ "Cnidarian",
+    startsWith(Subject, "Madracis") ~ "Coral", 
+    startsWith(Subject, "Monosiga") ~ "Choanozoan", 
+    startsWith(Subject, "Montipora") ~ "Coral", 
+    startsWith(Subject, "Montastraea") ~ "Coral", 
+    startsWith(Subject, "Mnemiopsis") ~ "Ctenophore", 
+    startsWith(Subject, "Nematostella") ~ "Cnidarian",
+    startsWith(Subject, "Oscarella") ~ "Sponge",
+    startsWith(Subject, "Pocillopora") ~ "Coral", 
+    startsWith(Subject, "Porites") ~ "Coral", 
+    startsWith(Subject, "Platygyra") ~ "Coral", 
+    startsWith(Subject, "Peve") ~ "Coral", 
+    startsWith(Subject, "Pleurobrachia") ~ "Ctenophore", 
+    startsWith(Subject, "Pseudodiploria") ~ "Coral", 
+    startsWith(Subject, "Seriatopora") ~ "Coral", 
+    startsWith(Subject, "Stylophora") ~ "Coral", 
+    startsWith(Subject, "Trichop") ~ "Placozoan",
+    TRUE ~ NA_character_
+  ))
+
+# Write as csv 
+write.csv(blast_all_annot, "../output/blast/all_proteins_annotated_blast.csv")
+```
+
+Plot
+```{r}
+# Plotting the heatmap-like plot
+ggplot(blast_all_annot, aes(x = Subject, y = QuerySeq_sub, fill = EValue)) +
+  geom_tile(color = "black") +  # create the boxes
+  scale_fill_viridis_c(trans = "log", option = "C", name = "EValue") +  # log scale for better visualization
+  theme_minimal() +  # minimal theme
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, size = 8),  # Rotate x-axis labels for readability
+        axis.text.y = element_text(size = 8),  # Adjust y-axis labels
+        axis.title = element_text(size = 10)) +  # Adjust title size
+  labs(x = "Subject", y = "QuerySeq", title = "EValue Heatmap between QuerySeq and Subject")
+```
+
+Subset by Dicer partners
+```{r}
+blast_sub <- blast_all_annot %>%
+  filter(QuerySeq_sub %in% c("Q8WYQ5", "O04492")) %>%
+  mutate(
+    QueryLabel = case_when(
+      QuerySeq_sub == "Q8WYQ5" ~ "DGCR8 (Animal)",
+      QuerySeq_sub == "O04492" ~ "HYL1 (Plant)",
+      TRUE ~ QuerySeq_sub
+    )
+  )
+
+# plot
+ggplot(blast_sub, aes(x = QueryLabel, y = Subject, fill = EValue)) +
+  geom_tile(color = "black") +
+  scale_fill_viridis_c(
+    option = "C",
+    name = "E-Value") +
+  facet_grid(Group ~ ., 
+             scales = "free_y", 
+             space = "free_y") +
+  theme_bw() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 20, face = "bold", colour = "black"),
+    axis.text.y = element_text(size = 12, colour = "black"),
+    axis.title.y = element_text(size = 16, colour = "black", face = "bold"),
+    strip.text.y = element_text(angle = 0, face = "bold", size = 18),
+    panel.grid = element_blank(),
+    panel.border = element_rect(color = "black", size = 0.8),
+    legend.position = "right"
+  ) +
+  labs(
+    x = NULL,
+    y = "Subject Proteins"
+  )
+
+ggsave("../output/blast/figures/dicer_partner_presence.pdf", plot = last_plot(), width = 10, height = 15)
+ggsave("../output/blast/figures/dicer_partner_presence.png", plot = last_plot(), width = 10, height = 15)
+```
+
+Subset by 0.05 evalue 
+```{r}
+blast_evalue_05 <- blast_all_annot %>%
+  filter(EValue < 0.05)
+```
+
+Plot
+```{r}
+ggplot(blast_evalue_05, aes(x = Subject, y = QuerySeq_sub, fill = EValue)) +
+  geom_tile(color = "black") +
+  scale_fill_viridis_c(
+    option = "C",
+    trans = "log10",
+    name = "E-Value (log10)"
+  ) +
+  facet_grid(Group ~ .,  # Vertical faceting (Group in rows)
+             scales = "free_y",  # Free y-axis per group
+             space = "free_y") +  # Adjust panel heights
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, size = 6),
+    strip.text.y = element_text(angle = 0, face = "bold")  # Horizontal strip labels
+  )
+```
+
+Subset by Dicer partners
+```{r}
+blast_sub <- blast_evalue_05 %>%
+  filter(QuerySeq_sub %in% c("Q8WYQ5", "O04492")) %>%
+  mutate(
+    QueryLabel = case_when(
+      QuerySeq_sub == "Q8WYQ5" ~ "DGCR8 (Animal)",
+      QuerySeq_sub == "O04492" ~ "HYL1 (Plant)",
+      TRUE ~ QuerySeq_sub
+    )
+  )
+
+# plot
+ggplot(blast_sub, aes(x = QueryLabel, y = Subject, fill = EValue)) +
+  geom_tile(color = "black") +
+  scale_fill_viridis_c(
+    option = "C",
+    name = "E-Value") +
+  facet_grid(Group ~ ., 
+             scales = "free_y", 
+             space = "free_y") +
+  theme_bw() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1, size = 20, face = "bold", colour = "black"),
+    axis.text.y = element_text(size = 12, colour = "black"),
+    axis.title.y = element_text(size = 16, colour = "black", face = "bold"),
+    strip.text.y = element_text(angle = 0, face = "bold", size = 18),
+    panel.grid = element_blank(),
+    panel.border = element_rect(color = "black", size = 0.8),
+    legend.position = "right"
+  ) +
+  labs(
+    x = NULL,
+    y = "Subject Proteins"
+  )
+
+ggsave("../output/blast/figures/dicer_partner_presence_evalue05.pdf", plot = last_plot(), width = 10, height = 15)
+ggsave("../output/blast/figures/dicer_partner_presence_evalue05.png", plot = last_plot(), width = 10, height = 15)
+```
+
+

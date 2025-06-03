@@ -1,0 +1,253 @@
+---
+title: "Domain visualization"
+author: "Jill Ashey"
+date: "2025-04-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ggplot2)
+library(tidyverse)
+```
+
+Load Pfam results 
+```{r}
+df <- read.table("../output/hmmer/hmmscan_dicer_partner.domtblout", header=FALSE, comment.char="#", fill=TRUE, stringsAsFactors=T)[,1:22]
+colnames(df) <- c(
+  "target_name", "target_accession", "target_length", "query_name", "query_accession", "query_length",
+  "E_value", "score", "bias", "domain_num", "domain_of", "c_Evalue", "i_Evalue", "domain_score", "domain_bias",
+  "hmm_from", "hmm_to", "ali_from", "ali_to", "env_from", "env_to", "acc")
+df <- na.omit(df)
+```
+
+Add Group information (ie coral, cnidarian, etc)
+```{r}
+df <- df %>%
+  mutate(query_name = as.character(query_name)) %>%
+  mutate(Group = case_when(
+    startsWith(query_name, "Acrop") ~ "Coral",
+    startsWith(query_name, "Anthopleura") ~ "Cnidarian",
+    startsWith(query_name, "protein|") ~ "Coral", 
+    startsWith(query_name, "Amphimedon") ~ "Sponge",
+    startsWith(query_name, "Anemonia") ~ "Cnidarian",
+    startsWith(query_name, "Ephydatia") ~ "Sponge",
+    startsWith(query_name, "Fungia") ~ "Coral", 
+    startsWith(query_name, "Gorgonia") ~ "Cnidarian",
+    startsWith(query_name, "Hydra") ~ "Cnidarian",
+    startsWith(query_name, "Madracis") ~ "Coral", 
+    startsWith(query_name, "Monosiga") ~ "Choanozoan", 
+    startsWith(query_name, "Montipora") ~ "Coral", 
+    startsWith(query_name, "Montastraea") ~ "Coral", 
+    startsWith(query_name, "Mnemiopsis") ~ "Ctenophore", 
+    startsWith(query_name, "Nematostella") ~ "Cnidarian",
+    startsWith(query_name, "Oscarella") ~ "Sponge",
+    startsWith(query_name, "Pocillopora") ~ "Coral", 
+    startsWith(query_name, "Porites") ~ "Coral", 
+    startsWith(query_name, "Platygyra") ~ "Coral", 
+    startsWith(query_name, "Peve") ~ "Coral", 
+    startsWith(query_name, "Pleurobrachia") ~ "Ctenophore", 
+    startsWith(query_name, "Pseudodiploria") ~ "Coral", 
+    startsWith(query_name, "Seriatopora") ~ "Coral", 
+    startsWith(query_name, "Stylophora") ~ "Coral", 
+    startsWith(query_name, "Trichop") ~ "Placozoan",
+    endsWith(query_name, "HUMAN") ~ "Human", 
+    endsWith(query_name, "ARATH") ~ "Plant", 
+    TRUE ~ NA_character_
+  ))
+```
+
+Read in blast data and join 
+```{r}
+blast <- read.csv("../output/blast/all_proteins_annotated_blast.csv")
+
+# Join with df 
+df_blast <- df %>%
+  full_join(blast, by = c("query_name" = "Subject"))
+```
+
+Subset by HYL1
+```{r}
+df_blast_hyl1 <- df_blast %>%
+  filter(Function == "Plant: miRNA microprocessor co-factor / Dicer partner — dsRNA binding protein (HYL1)")
+```
+
+Select specific domains and plot 
+```{r}
+# df_clean <- df %>%
+#   select(Domain = V1, Protein = V4, Start = V18, End = V19, Group = Group) %>%
+#   filter(Domain %in% c(
+#   "Dicer_platform", "Dicer_dsRBD", "Dicer_dimer",
+#   "Ribonuclease_3", "PAZ", "Helicase_C", "DEAD",
+#   "Ribonucleas_3_3", "Dicer_PBD", "Helicase_C_2",
+#   "DSRM_2", "dsrm", "DND1_DSRM"
+# )) %>%
+#   na.omit()
+
+df_blast_hyl1$query_name <- factor(df_blast_hyl1$query_name, levels = unique(df_blast_hyl1$query_name))
+
+ggplot(df_blast_hyl1) +
+  geom_rect(aes(
+    xmin = ali_from,
+    xmax = ali_to,
+    ymin = as.numeric(factor(query_name)) - 0.4,
+    ymax = as.numeric(factor(query_name)) + 0.4,
+    fill = target_name
+  ), color = "black", size = 0.3) +  # Thinner border lines
+  
+  # Vertical faceting
+  # facet_grid(Group.x ~ ., 
+  #            scales = "free_y", 
+  #            space = "free_y",
+  #            labeller = labeller(Group.x = label_both)) +  # Shows "Group: Coral"
+  
+  # Improved y-axis scaling
+  scale_y_continuous(
+    breaks = 1:length(unique(df_blast_hyl1$query_name)),
+    labels = levels(factor(df_blast_hyl1$query_name)),  # Ensures proper ordering
+    expand = c(0.02, 0.02)  # Reduce white space
+  ) +
+  
+  # Better color contrast
+  # scale_fill_brewer(palette = "Set3", 
+  #                   na.value = "gray90",
+  #                   guide = guide_legend(ncol = 2)) +  # Multi-column legend
+  
+  labs(x = "Amino Acid Position", 
+       y = "Protein") +
+  
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 8, face = "italic"),
+    axis.text.x = element_text(angle = 0, hjust = 0.5),
+    strip.text.y = element_text(angle = 0, face = "bold", size = 10),  # Horizontal labels
+    panel.spacing = unit(0.8, "lines"),  # More space between facets
+    legend.position = "left",
+    plot.title.position = "plot"  # Left-aligned title
+  )
+ggsave("../output/hmmer/figures/hyl1_domains.pdf", plot = last_plot(), width = 30, height = 15)
+ggsave("../output/hmmer/figures/hyl1_domains.png", plot = last_plot(), width = 30, height = 15)
+```
+
+```{r}
+# First ensure proper ordering
+df_clean <- df_clean %>%
+  mutate(Protein = fct_inorder(Protein))  # Maintain original order
+
+ggplot(df_clean) +
+  geom_rect(aes(
+    xmin = Start,
+    xmax = End,
+    ymin = as.numeric(factor(Protein)) - 0.4,
+    ymax = as.numeric(factor(Protein)) + 0.4,
+    fill = Domain
+  ), color = "black", linewidth = 0.2) +
+  
+  # Vertical faceting by Group
+  facet_grid(Group.x ~ ., 
+             scales = "free_y", 
+             space = "free_y") +
+  
+  # Y-axis scaling
+  scale_y_continuous(
+    breaks = 1:length(unique(df_clean$Protein)),
+    labels = unique(df_clean$Protein),
+    expand = c(0.05, 0.05)
+  ) +
+  
+  # Cosmetic improvements
+  scale_fill_brewer(palette = "Set3", na.value = "grey90") +
+  labs(
+    x = "Amino Acid Position", 
+    y = "Protein", 
+    title = "Domain Architecture of Coral microRNA Toolkit Proteins",
+    subtitle = "Grouped by evolutionary origin"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 8, face = "italic"),
+    strip.text.y = element_text(angle = 0, face = "bold", size = 10),
+    panel.spacing = unit(0.8, "lines"),
+    legend.position = "bottom"
+  )
+
+```
+
+Not sure all the domains are being properly captured in the code...come back to this. 
+
+```{r}
+# First create unique protein-group combinations
+df_clean <- df_clean %>%
+  mutate(Protein_Group = paste(Protein, Group, sep = " | ")) %>%
+  # Maintain original ordering while creating new factor
+  mutate(Protein_Group = fct_inorder(Protein_Group))
+
+# Modified plot code
+ggplot(df_clean) +
+  geom_rect(aes(
+    xmin = Start,
+    xmax = End,
+    ymin = as.numeric(Protein_Group) - 0.4,
+    ymax = as.numeric(Protein_Group) + 0.4,
+    fill = Domain
+  ), color = "black", linewidth = 0.2) +
+  
+  facet_grid(Group ~ ., 
+             scales = "free_y", 
+             space = "free_y",
+             switch = "y") +  # Group labels on left
+  
+  scale_y_continuous(
+    breaks = 1:nlevels(df_clean$Protein_Group),
+    labels = levels(df_clean$Protein_Group),
+    expand = c(0.05, 0.05)
+  ) +
+  
+  scale_fill_brewer(palette = "Set3", na.value = "grey90") +
+  labs(
+    x = "Amino Acid Position", 
+    y = "Protein", 
+    fill = "Protein Domain"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_text(size = 8, face = "italic", hjust = 1),
+    strip.text.y.left = element_text(angle = 0, face = "bold", size = 10),
+    panel.spacing = unit(1, "lines"),
+    legend.position = "bottom",
+    legend.box.margin = margin(t = 10),
+    plot.title.position = "plot"
+  )
+
+```
+
+
+
+
+
+EXAMPLE
+
+```{r}
+library(ggplot2)
+
+# Example dataframe
+domains <- data.frame(
+  Protein = c("Coral_HYL1", "Coral_HYL1", "Human_HYL1", "Human_HYL1", "Human_DGCR8", "Human_DGCR8"),
+  Domain = c("dsRBD1", "dsRBD2", "dsRBD1", "dsRBD2", "dsRBD1", "dsRBD2"),
+  Start = c(45, 150, 50, 155, 276, 422),
+  End = c(115, 220, 120, 225, 347, 494),
+  Color = c("skyblue", "steelblue", "lightgreen", "green4", "coral", "red3")
+)
+
+# Plot
+ggplot(domains) +
+  geom_rect(aes(xmin = Start, xmax = End, ymin = as.numeric(factor(Protein)) - 0.4, 
+                ymax = as.numeric(factor(Protein)) + 0.4, fill = Domain), 
+            color = "black") +
+  scale_y_continuous(breaks = 1:length(unique(domains$Protein)), labels = unique(domains$Protein)) +
+  labs(x = "Amino Acid Position", y = "Protein") +
+  theme_minimal() +
+  scale_fill_manual(values = unique(domains$Color))
+```
+

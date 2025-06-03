@@ -1,0 +1,539 @@
+IQ-TREE 2.2.2.3 COVID-edition built Jun 29 2023
+
+Input file name: combined_dicer_partner_aligned.fasta
+Type of analysis: ModelFinder + tree reconstruction + ultrafast bootstrap (1000 replicates)
+Random seed number: 802917
+
+REFERENCES
+----------
+
+To cite IQ-TREE please use:
+
+Bui Quang Minh, Heiko A. Schmidt, Olga Chernomor, Dominik Schrempf,
+Michael D. Woodhams, Arndt von Haeseler, and Robert Lanfear (2020)
+IQ-TREE 2: New models and efficient methods for phylogenetic inference
+in the genomic era. Mol. Biol. Evol., in press.
+https://doi.org/10.1093/molbev/msaa015
+
+To cite ModelFinder please use: 
+
+Subha Kalyaanamoorthy, Bui Quang Minh, Thomas KF Wong, Arndt von Haeseler,
+and Lars S Jermiin (2017) ModelFinder: Fast model selection for
+accurate phylogenetic estimates. Nature Methods, 14:587–589.
+https://doi.org/10.1038/nmeth.4285
+
+Since you used ultrafast bootstrap (UFBoot) please also cite: 
+
+Diep Thi Hoang, Olga Chernomor, Arndt von Haeseler, Bui Quang Minh,
+and Le Sy Vinh (2018) UFBoot2: Improving the ultrafast bootstrap
+approximation. Mol. Biol. Evol., 35:518–522.
+https://doi.org/10.1093/molbev/msx281
+
+SEQUENCE ALIGNMENT
+------------------
+
+Input data: 70 sequences with 4504 amino-acid sites
+Number of constant sites: 2010 (= 44.627% of all sites)
+Number of invariant (constant or ambiguous constant) sites: 2010 (= 44.627% of all sites)
+Number of parsimony informative sites: 1022
+Number of distinct site patterns: 2799
+
+ModelFinder
+-----------
+
+Best-fit model according to BIC: VT+I+G4
+
+List of models sorted by BIC scores: 
+
+Model                  LogL         AIC      w-AIC        AICc     w-AICc         BIC      w-BIC
+VT+I+G4          -58614.989  117507.978 - 0.000142  117516.897 - 0.000197  118399.347 +    0.999
+VT+I+R4          -58601.128  117490.256 +        1  117499.836 +        1  118413.688 - 0.000768
+WAG+I+G4         -58681.027  117640.054 - 2.96e-33  117648.973 - 4.12e-33  118531.423 - 2.09e-29
+WAG+I+R4         -58664.396  117616.791 - 3.34e-28  117626.371 - 3.34e-28  118540.223 - 2.56e-31
+JTT+I+G4         -58688.059  117654.117 - 2.62e-36  117663.036 - 3.64e-36  118545.485 - 1.85e-32
+JTTDCMut+I+G4    -58688.433  117654.865 -  1.8e-36  117663.784 - 2.51e-36  118546.233 - 1.27e-32
+JTT+I+R4         -58672.876  117633.752 - 6.92e-32  117643.333 - 6.92e-32  118557.184 - 5.32e-35
+JTTDCMut+I+R4    -58673.114  117634.228 - 5.46e-32  117643.808 - 5.46e-32  118557.659 - 4.19e-35
+Q.pfam+I+R4      -58720.680  117729.361 -  1.2e-52  117738.941 -  1.2e-52  118652.792 - 9.22e-56
+Q.pfam+I+G4      -58743.595  117765.191 - 1.99e-60  117774.109 - 2.77e-60  118656.559 -  1.4e-56
+LG+I+R4          -58728.357  117744.713 - 5.56e-56  117754.294 - 5.56e-56  118668.145 - 4.27e-59
+LG+I+G4          -58751.847  117781.694 - 5.19e-64  117790.612 - 7.22e-64  118673.062 - 3.66e-60
+LG+I+R5          -58728.090  117748.180 - 9.83e-57  117758.032 - 8.58e-57  118684.437 - 1.24e-62
+LG+I+R3          -58746.377  117776.754 - 6.13e-63  117786.067 - 7.01e-63  118687.361 - 2.87e-63
+LG+R4            -58743.147  117772.295 -  5.7e-62  117781.741 -  6.1e-62  118689.314 - 1.08e-63
+LG+G4            -58770.424  117816.848 - 1.21e-71  117825.637 - 1.79e-71  118701.804 -  2.1e-66
+LG+R5            -58742.033  117774.066 - 2.35e-62  117783.782 -  2.2e-62  118703.911 - 7.32e-67
+LG+R3            -58771.386  117824.771 -  2.3e-73  117833.952 -  2.8e-73  118728.965 - 2.65e-72
+LG+I+R2          -58804.691  117889.383 - 2.14e-87  117898.432 - 2.79e-87  118787.164 - 6.11e-85
+LG+R2            -58833.244  117944.489 - 2.32e-99  117953.407 - 3.22e-99  118835.857 - 1.63e-95
+Q.insect+I+G4    -58876.214  118030.427 - 5.05e-118  118039.345 - 7.03e-118  118921.795 - 3.56e-114
+Q.insect+I+R4    -58855.468  117998.936 - 3.48e-111  118008.516 - 3.48e-111  118922.367 - 2.67e-114
+WAG+F+I+G4       -58810.287  117936.574 - 1.21e-97  117948.138 - 4.49e-98  118949.784 - 2.98e-120
+VT+F+I+G4        -58810.633  117937.266 - 8.57e-98  117948.830 - 3.18e-98  118950.476 - 2.11e-120
+WAG+F+I+R4       -58793.260  117912.520 - 2.02e-92  117924.839 - 5.15e-93  118957.794 - 5.42e-122
+VT+F+I+R4        -58796.766  117919.531 - 6.08e-94  117931.850 - 1.55e-94  118964.805 - 1.63e-123
+JTTDCMut+F+I+G4  -58825.964  117967.928 - 1.88e-104  117979.492 - 6.98e-105  118981.138 - 4.63e-127
+JTT+F+I+G4       -58830.526  117977.052 - 1.97e-106  117988.616 - 7.29e-107  118990.262 - 4.83e-129
+JTTDCMut+F+I+R4  -58810.798  117947.596 - 4.89e-100  117959.915 - 1.24e-100  118992.870 - 1.31e-129
+JTT+F+I+R4       -58815.451  117956.902 - 4.67e-102  117969.220 - 1.19e-102  119002.175 - 1.25e-131
+Q.plant+I+R4     -58909.611  118107.223 - 1.06e-134  118116.803 - 1.06e-134  119030.655 - 8.18e-138
+Q.plant+I+G4     -58936.812  118151.625 - 2.43e-144  118160.543 - 3.38e-144  119042.993 - 1.71e-140
+Q.pfam+F+I+R4    -58866.773  118059.546 - 2.4e-124  118071.865 - 6.1e-125  119104.820 - 6.43e-154
+Q.pfam+F+I+G4    -58889.774  118095.548 - 3.65e-132  118107.112 - 1.35e-132  119108.758 - 8.97e-155
+PMB+I+G4         -58973.136  118224.272 - 4.08e-160  118233.191 - 5.68e-160  119115.641 - 2.87e-156
+LG+F+I+R4        -58875.418  118076.836 - 4.22e-128  118089.155 - 1.07e-128  119122.110 - 1.13e-157
+PMB+I+R4         -58958.547  118205.095 - 5.95e-156  118214.675 - 5.95e-156  119128.527 - 4.57e-159
+LG+F+I+G4        -58899.857  118115.715 - 1.53e-136  118127.278 - 5.66e-137  119128.924 - 3.75e-159
+Q.yeast+I+R4     -58970.540  118229.080 - 3.68e-161  118238.660 - 3.68e-161  119152.512 - 2.83e-164
+Q.yeast+I+G4     -58994.277  118266.555 - 2.68e-169  118275.473 - 3.74e-169  119157.923 - 1.89e-165
+Blosum62+I+G4    -59007.945  118293.890 - 3.11e-175  118302.808 - 4.33e-175  119185.258 - 2.19e-171
+Blosum62+I+R4    -58990.816  118269.633 - 5.76e-170  118279.213 - 5.76e-170  119193.064 - 4.43e-173
+Q.insect+F+I+R4  -58921.941  118169.882 - 2.64e-148  118182.201 - 6.7e-149  119215.156 - 7.06e-178
+Q.insect+F+I+G4  -58943.506  118203.012 - 1.69e-155  118214.575 - 6.26e-156  119216.222 - 4.14e-178
+Q.yeast+F+I+R4   -58932.065  118190.130 - 1.06e-152  118202.449 - 2.69e-153  119235.403 - 2.83e-182
+Q.yeast+F+I+G4   -58956.222  118228.444 - 5.06e-161  118240.008 - 1.88e-161  119241.654 - 1.24e-183
+cpREV+F+I+R4     -58972.421  118270.841 - 3.15e-170  118283.160 -   8e-171  119316.115 - 8.43e-200
+Q.mammal+I+R4    -59052.443  118392.886 - 9.91e-197  118402.466 - 9.91e-197  119316.318 - 7.62e-200
+Q.mammal+I+G4    -59073.757  118425.514 - 8.15e-204  118434.433 - 1.13e-203  119316.883 - 5.74e-200
+cpREV+F+I+G4     -58998.720  118313.441 - 1.77e-179  118325.004 - 6.56e-180  119326.651 - 4.35e-202
+PMB+F+I+G4       -59000.635  118317.270 - 2.61e-180  118328.834 - 9.67e-181  119330.480 - 6.41e-203
+PMB+F+I+R4       -58985.732  118297.465 - 5.21e-176  118309.783 - 1.32e-176  119342.738 - 1.4e-205
+Blosum62+F+I+G4  -59012.573  118341.146 - 1.7e-185  118352.709 - 6.32e-186  119354.356 - 4.19e-208
+Blosum62+F+I+R4  -58995.548  118317.097 - 2.84e-180  118329.416 - 7.23e-181  119362.370 - 7.62e-210
+rtREV+F+I+R4     -58998.706  118323.413 - 1.21e-181  118335.732 - 3.07e-182  119368.687 - 3.24e-211
+rtREV+F+I+G4     -59022.846  118361.692 - 5.89e-190  118373.255 - 2.18e-190  119374.902 - 1.45e-212
+cpREV+I+R4       -59089.078  118466.156 - 1.22e-212  118475.737 - 1.22e-212  119389.588 - 9.36e-216
+cpREV+I+G4       -59111.447  118500.894 - 3.49e-220  118509.813 - 4.86e-220  119392.262 - 2.46e-216
+DCMut+F+I+R4     -59013.054  118352.108 - 7.1e-188  118364.426 - 1.81e-188  119397.381 - 1.9e-217
+Dayhoff+F+I+R4   -59013.251  118352.502 - 5.83e-188  118364.821 - 1.48e-188  119397.776 - 1.56e-217
+DCMut+F+I+G4     -59036.747  118389.494 - 5.41e-196  118401.057 - 2.01e-196  119402.703 - 1.33e-218
+Dayhoff+F+I+G4   -59037.103  118390.207 - 3.79e-196  118401.770 - 1.4e-196  119403.417 - 9.3e-219
+rtREV+I+R4       -59108.042  118504.083 - 7.08e-221  118513.663 - 7.08e-221  119427.515 - 5.44e-224
+rtREV+I+G4       -59129.411  118536.822 - 5.51e-228  118545.740 - 7.67e-228  119428.190 - 3.88e-224
+Q.plant+F+I+R4   -59031.746  118389.491 - 5.41e-196  118401.810 - 1.38e-196  119434.765 - 1.45e-225
+Q.plant+F+I+G4   -59058.727  118433.454 - 1.54e-205  118445.017 - 5.71e-206  119446.664 - 3.78e-228
+LG+I             -59194.134  118664.268 - 1.17e-255  118673.057 - 1.73e-255  119549.224 - 2.03e-250
+mtInv+F+I+R4     -59096.044  118518.088 - 6.44e-224  118530.407 - 1.64e-224  119563.362 - 1.73e-253
+mtInv+F+I+G4     -59123.443  118562.885 - 1.21e-233  118574.449 - 4.47e-234  119576.095 - 2.96e-256
+Dayhoff+I+R4     -59187.161  118662.321 - 3.08e-255  118671.902 - 3.08e-255  119585.753 - 2.37e-258
+DCMut+I+R4       -59187.553  118663.106 - 2.08e-255  118672.686 - 2.08e-255  119586.538 - 1.6e-258
+Dayhoff+I+G4     -59212.492  118702.985 - 4.56e-264  118711.903 - 6.35e-264  119594.353 - 3.22e-260
+DCMut+I+G4       -59212.643  118703.286 - 3.92e-264  118712.204 - 5.46e-264  119594.654 - 2.77e-260
+Q.bird+I+R4      -59222.889  118733.778 - 9.39e-271  118743.358 - 9.39e-271  119657.210 - 7.21e-274
+Q.bird+I+G4      -59246.481  118770.962 - 7.91e-279  118779.881 - 1.1e-278  119662.331 - 5.57e-275
+LG               -59265.315  118804.630 - 3.87e-286  118813.291 - 6.12e-286  119683.173 - 1.66e-279
+Q.mammal+F+I+G4  -59231.823  118779.645 - 1.03e-280  118791.209 - 3.82e-281  119792.855 - 2.53e-303
+Q.mammal+F+I+R4  -59211.000  118748.001 - 7.66e-274  118760.320 - 1.95e-274  119793.274 - 2.05e-303
+FLU+F+I+R4       -59236.263  118798.525 - 8.18e-285  118810.844 - 2.08e-285  119843.799 - 2.19e-314
+FLU+F+I+G4       -59264.516  118845.033 - 6.51e-295  118856.596 - 2.42e-295  119858.243 - 1.6e-317
+mtMet+F+I+R4     -59255.219  118836.437 - 4.79e-293  118848.756 - 1.22e-293  119881.711 - 1.28e-322
+mtMet+F+I+G4     -59285.692  118887.384 - 4.14e-304  118898.947 - 1.54e-304  119900.594 -        0
+HIVb+F+I+R4      -59310.212  118946.424 - 6.27e-317  118958.743 - 1.59e-317  119991.698 -        0
+HIVb+F+I+G4      -59338.142  118992.285 -        0  119003.848 -        0  120005.494 -        0
+mtREV+F+I+R4     -59331.744  118989.489 -        0  119001.808 -        0  120034.762 -        0
+mtREV+F+I+G4     -59358.646  119033.292 -        0  119044.856 -        0  120046.502 -        0
+mtZOA+F+I+R4     -59382.394  119090.787 -        0  119103.106 -        0  120136.061 -        0
+FLU+I+R4         -59473.040  119234.081 -        0  119243.661 -        0  120157.513 -        0
+mtZOA+F+I+G4     -59417.389  119150.778 -        0  119162.342 -        0  120163.988 -        0
+FLU+I+G4         -59500.298  119278.596 -        0  119287.514 -        0  120169.964 -        0
+Q.bird+F+I+R4    -59416.918  119159.836 -        0  119172.155 -        0  120205.109 -        0
+Q.bird+F+I+G4    -59440.929  119197.857 -        0  119209.421 -        0  120211.067 -        0
+HIVb+I+R4        -59515.320  119318.640 -        0  119328.220 -        0  120242.072 -        0
+HIVb+I+G4        -59539.220  119356.441 -        0  119365.359 -        0  120247.809 -        0
+mtVer+F+I+R4     -59666.260  119658.520 -        0  119670.839 -        0  120703.794 -        0
+mtVer+F+I+G4     -59705.430  119726.860 -        0  119738.423 -        0  120740.070 -        0
+mtART+F+I+R4     -59807.459  119940.917 -        0  119953.236 -        0  120986.191 -        0
+mtART+F+I+G4     -59844.584  120005.168 -        0  120016.732 -        0  121018.378 -        0
+FLAVI+F+I+R4     -59894.583  120115.166 -        0  120127.485 -        0  121160.439 -        0
+FLAVI+F+I+G4     -59918.218  120152.435 -        0  120163.999 -        0  121165.645 -        0
+mtMAM+F+I+R4     -59939.811  120205.622 -        0  120217.941 -        0  121250.895 -        0
+mtMAM+F+I+G4     -59969.035  120254.070 -        0  120265.634 -        0  121267.280 -        0
+HIVw+F+I+R4      -60058.448  120442.896 -        0  120455.215 -        0  121488.169 -        0
+HIVw+F+I+G4      -60084.759  120485.518 -        0  120497.082 -        0  121498.728 -        0
+FLAVI+I+R4       -60279.563  120847.126 -        0  120856.706 -        0  121770.557 -        0
+FLAVI+I+G4       -60303.220  120884.440 -        0  120893.359 -        0  121775.809 -        0
+HIVw+I+R4        -61118.232  122524.463 -        0  122534.044 -        0  123447.895 -        0
+HIVw+I+G4        -61142.572  122563.143 -        0  122572.061 -        0  123454.511 -        0
+mtZOA+I+R4       -61393.989  123075.978 -        0  123085.559 -        0  123999.410 -        0
+mtZOA+I+G4       -61420.685  123119.370 -        0  123128.288 -        0  124010.738 -        0
+mtREV+I+G4       -61636.683  123551.366 -        0  123560.285 -        0  124442.735 -        0
+mtREV+I+R4       -61620.254  123528.509 -        0  123538.089 -        0  124451.940 -        0
+mtMet+I+R4       -61801.489  123890.977 -        0  123900.557 -        0  124814.409 -        0
+mtMet+I+G4       -61831.161  123940.323 -        0  123949.241 -        0  124831.691 -        0
+mtVer+I+R4       -61952.889  124193.778 -        0  124203.358 -        0  125117.210 -        0
+mtVer+I+G4       -61989.751  124257.501 -        0  124266.420 -        0  125148.870 -        0
+mtART+I+R4       -62424.693  125137.386 -        0  125146.966 -        0  126060.818 -        0
+mtART+I+G4       -62448.569  125175.138 -        0  125184.057 -        0  126066.507 -        0
+mtMAM+I+R4       -62435.954  125159.909 -        0  125169.489 -        0  126083.341 -        0
+mtInv+I+R4       -62437.751  125163.503 -        0  125173.083 -        0  126086.935 -        0
+mtInv+I+G4       -62462.261  125202.522 -        0  125211.441 -        0  126093.891 -        0
+mtMAM+I+G4       -62463.756  125205.511 -        0  125214.430 -        0  126096.879 -        0
+
+AIC, w-AIC   : Akaike information criterion scores and weights.
+AICc, w-AICc : Corrected AIC scores and weights.
+BIC, w-BIC   : Bayesian information criterion scores and weights.
+
+Plus signs denote the 95% confidence sets.
+Minus signs denote significant exclusion.
+
+SUBSTITUTION PROCESS
+--------------------
+
+Model of substitution: VT+I+G4
+
+State frequencies: (model)
+
+Model of rate heterogeneity: Invar+Gamma with 4 categories
+Proportion of invariable sites: 0.0100
+Gamma shape alpha: 3.4315
+
+ Category  Relative_rate  Proportion
+  0         0              0.0100
+  1         0.4244         0.2475
+  2         0.7605         0.2475
+  3         1.0949         0.2475
+  4         1.7606         0.2475
+Relative rates are computed as MEAN of the portion of the Gamma distribution falling in the category.
+
+MAXIMUM LIKELIHOOD TREE
+-----------------------
+
+Log-likelihood of the tree: -58592.9582 (s.e. 1206.1680)
+Unconstrained log-likelihood (without tree): -30997.0313
+Number of free parameters (#branches + #model parameters): 139
+Akaike information criterion (AIC) score: 117463.9164
+Corrected Akaike information criterion (AICc) score: 117472.8348
+Bayesian information criterion (BIC) score: 118355.2847
+
+Total tree length (sum of branch lengths): 49.9286
+Sum of internal branch lengths: 12.9902 (26.0175% of tree length)
+
+WARNING: 1 near-zero internal branches (<0.0002) should be treated with caution
+         Such branches are denoted by '**' in the figure below
+
+NOTE: Tree is UNROOTED although outgroup taxon 'sp|Q8WYQ5|DGCR8_HUMAN' is drawn at root
+Numbers in parentheses are  ultrafast bootstrap support (%)
+
++----------sp|Q8WYQ5|DGCR8_HUMAN
+|
+|                              +------------sp|O04492|DRB1_ARATH
+|                           +--| (59)
+|                           |  +---------------Monosiga_brevicollis_9040
+|                        +--| (60)
+|                        |  |                 +**Acropora_digitifera_7405
+|                        |  |           +-----| (100)
+|                        |  |           |     |  +--Acropora_millepora_6116
+|                        |  |           |     +--| (81)
+|                        |  |           |        +--Acropora_tenuis_15491
+|                        |  |  +--------| (100)
+|                        |  |  |        |        +--protein|evm.model.chromosome_13.1479
+|                        |  |  |        |     +--| (100)
+|                        |  |  |        |     |  |  +--Montastraea_cavernosa_115239
+|                        |  |  |        |     |  +--| (98)
+|                        |  |  |        |     |     +--Montastraea_faveolata_5718
+|                        |  |  |        |  +--| (100)
+|                        |  |  |        |  |  |     +--Pocillopora_acuta_HIv2___RNAseq.g8391.t1
+|                        |  |  |        |  |  |  +--| (100)
+|                        |  |  |        |  |  |  |  +--Pocillopora_meandrina_HIv1___RNAseq.g6627.t2
+|                        |  |  |        |  |  +--| (100)
+|                        |  |  |        |  |     +--Seriatopora_hystrix_90640
+|                        |  |  |        +--| (61)
+|                        |  |  |           +---Porites_australiensis_44369
+|                        |  +--| (42)
+|                        |     |     +------Anthopleura_elegantissima_45452
+|                        |     |  +--| (100)
+|                        |     |  |  |           +--Fungia_scutaria_58854
+|                        |     |  |  |        +--| (98)
+|                        |     |  |  |        |  +--Pseudodiploria_strigosa_1650
+|                        |     |  |  |     +--| (98)
+|                        |     |  |  |     |  |  +--Madracis_auretenra_48396
+|                        |     |  |  |     |  +--| (100)
+|                        |     |  |  |     |     |  +--Pocillopora_damicornis_4894
+|                        |     |  |  |     |     +--| (100)
+|                        |     |  |  |     |        +--Stylophora_pistillata_5433
+|                        |     |  |  +-----| (100)
+|                        |     |  |        |  +---Montipora_capitata_HIv3___RNAseq.g47961.t1
+|                        |     |  |        +--| (95)
+|                        |     |  |           |  +**Peve_00044098
+|                        |     |  |           +--| (100)
+|                        |     |  |              +--Porites_lobata_17719
+|                        |     +--| (70)
+|                        |        |  +----------------Amphimedon_queenslandica_21637
+|                        |        +--| (71)
+|                        |           |  +-------Ephydatia_muelleri_6597
+|                        |           +--| (95)
+|                        |              +--------Gorgonia_ventalina_46388
+|                     +--| (63)
+|                     |  |   +---------------Hydra_magnapapillata_6561
+|                     |  +---| (67)
+|                     |      +-----------------------Nematostella_vectensis_18156
+|                  +--| (51)
+|                  |  |                                      +--Acropora_hyacinthus_5411
+|                  |  |                              +-------| (100)
+|                  |  |                              |       +--Porites_astreoides_6857
+|                  |  |                         +----| (98)
+|                  |  |                         |    +------Trichoplax_adherens_333
+|                  |  |              +----------| (100)
+|                  |  |              |          +----------------Anemonia_viridis_2289
+|                  |  |           +**| (45)
+|                  |  |           |  +--------------------Pleurobrachia_pileus_4845
+|                  |  |        +--| (61)
+|                  |  |        |  +------------------Montastraea_faveolata_1842
+|                  |  |     +--| (42)
+|                  |  |     |  |           +----------------------Mnemiopsis_leidyi_4769
+|                  |  |     |  |  +--------| (95)
+|                  |  |     |  |  |        +-------------------Pleurobrachia_pileus_1927
+|                  |  |     |  +--| (72)
+|                  |  |     |     +------------------Oscarella_carmela_20971
+|                  |  |  +--| (57)
+|                  |  |  |  +----------------Acropora_hyacinthus_9033
+|                  |  +--| (60)
+|                  |     |  +-----------------Monosiga_brevicollis_3046
+|                  |     +--| (61)
+|                  |        +-----------------------Mnemiopsis_leidyi_8807
+|               +--| (77)
+|               |  |     +-----------------------Acropora_palmata_3542
+|               |  +-----| (63)
+|               |        +--------------------Acropora_palmata_5159
+|           +---| (83)
+|           |   |                  +----------Porites_astreoides_10427
+|           |   +------------------| (100)
+|           |                      +-------Trichoplax_adherens_3817
+|        +--| (64)
+|        |  +---------------------Platygyra_carnosus_37476
+|     +--| (78)
+|     |  +-------------------------------Oscarella_carmela_14446
+|  +--| (98)
+|  |  |     +----------Amphimedon_queenslandica_24710
+|  |  |  +--| (99)
+|  |  |  |  +--------Ephydatia_muelleri_7728
+|  |  +--| (50)
+|  |     |  +----------------------Anemonia_viridis_1669
+|  |     +--| (44)
+|  |        +--------------Hydra_magnapapillata_8206
++--| (95)
+|  +--------Gorgonia_ventalina_65685
+|
+|                         +**Acropora_digitifera_6418
+|                      +--| (100)
+|                      |  +**Acropora_millepora_12853
+|                   +--| (100)
+|                   |  +**Acropora_tenuis_14787
+|                +--| (100)
+|                |  +-----Montipora_capitata_HIv3___RNAseq.g8840.t1
+|             +--| (80)
+|             |  |     +--Porites_australiensis_35786
+|             |  |  +--| (96)
+|             |  |  |  +--Porites_lobata_18203
+|             |  +--| (100)
+|             |     +--Peve_00031717
+|          +--| (62)
+|          |  |     +--protein|evm.model.chromosome_4.119
+|          |  |  +--| (96)
+|          |  |  |  |  +--Montastraea_cavernosa_49417
+|          |  |  |  +--| (100)
+|          |  |  |     |  +--Platygyra_carnosus_19926
+|          |  |  |     +--| (100)
+|          |  |  |        +--Pseudodiploria_strigosa_4324
+|          |  +--| (99)
+|          |     +--Fungia_scutaria_28429
+|     +----| (100)
+|     |    |  +--Madracis_auretenra_56665
+|     |    +--| (100)
+|     |       |        +**Pocillopora_acuta_HIv2___RNAseq.g16204.t1
+|     |       |     +--| (100)
+|     |       |     |  +--Pocillopora_damicornis_12054
+|     |       |  +--| (100)
+|     |       |  |  +--Pocillopora_meandrina_HIv1___RNAseq.g22731.t1
+|     |       +--| (100)
+|     |          |  +--Seriatopora_hystrix_57859
+|     |          +--| (100)
+|     |             +--Stylophora_pistillata_19902
+|  +--| (68)
+|  |  +-----Anthopleura_elegantissima_47641
++--| (97)
+   +-----Nematostella_vectensis_2148
+
+Tree in newick format:
+
+(sp|Q8WYQ5|DGCR8_HUMAN:0.7373464343,((((((((((sp|O04492|DRB1_ARATH:0.9131549274,Monosiga_brevicollis_9040:1.0727161765)59:0.1009580844,(((Acropora_digitifera_7405:0.0000026504,(Acropora_millepora_6116:0.0158722115,Acropora_tenuis_15491:0.0630810748)81:0.0019938357)100:0.4167919093,(((protein|evm.model.chromosome_13.1479:0.0932466446,(Montastraea_cavernosa_115239:0.0473624799,Montastraea_faveolata_5718:0.1350898905)98:0.0497301458)100:0.0737233332,((Pocillopora_acuta_HIv2___RNAseq.g8391.t1:0.0069095379,Pocillopora_meandrina_HIv1___RNAseq.g6627.t2:0.0122145772)100:0.0798843590,Seriatopora_hystrix_90640:0.1531833912)100:0.2007933039)100:0.1226788936,Porites_australiensis_44369:0.2673605565)61:0.0648360999)100:0.6275265777,((Anthopleura_elegantissima_45452:0.5116616283,(((Fungia_scutaria_58854:0.0941988207,Pseudodiploria_strigosa_1650:0.1561715176)98:0.0580899890,(Madracis_auretenra_48396:0.0536326119,(Pocillopora_damicornis_4894:0.2108292355,Stylophora_pistillata_5433:0.0389143966)100:0.1649713884)100:0.1054089226)98:0.1108928825,(Montipora_capitata_HIv3___RNAseq.g47961.t1:0.2869998626,(Peve_00044098:0.0000028036,Porites_lobata_17719:0.0158104343)100:0.1803550265)95:0.0882657779)100:0.4378890196)100:0.2364416705,(Amphimedon_queenslandica_21637:1.1560641172,(Ephydatia_muelleri_6597:0.5357937095,Gorgonia_ventalina_46388:0.6241626714)95:0.2573604977)71:0.1946012464)70:0.2441354667)42:0.0938803194)60:0.1369886514,(Hydra_magnapapillata_6561:1.0917678527,Nematostella_vectensis_18156:1.6357037769)67:0.3088341006)63:0.1158211888,((((((((Acropora_hyacinthus_5411:0.0412976260,Porites_astreoides_6857:0.1489136527)100:0.5679161238,Trichoplax_adherens_333:0.4655502859)98:0.3922505119,Anemonia_viridis_2289:1.1175144097)100:0.7473511070,Pleurobrachia_pileus_4845:1.3962680773)45:0.0000024350,Montastraea_faveolata_1842:1.2524154321)61:0.2114083759,((Mnemiopsis_leidyi_4769:1.5441967541,Pleurobrachia_pileus_1927:1.3596658202)95:0.5903099080,Oscarella_carmela_20971:1.2967984787)72:0.1555496711)42:0.0811552852,Acropora_hyacinthus_9033:1.1283514216)57:0.1636496279,(Monosiga_brevicollis_3046:1.1863033759,Mnemiopsis_leidyi_8807:1.5833637991)61:0.2413038729)60:0.0684742094)51:0.1239163545,(Acropora_palmata_3542:1.6250138305,Acropora_palmata_5159:1.3801920761)63:0.3958355743)77:0.2197478224,(Porites_astreoides_10427:0.7285490732,Trichoplax_adherens_3817:0.5747057562)100:1.2538493900)83:0.3162183695,Platygyra_carnosus_37476:1.4584478013)64:0.1620011045,Oscarella_carmela_14446:2.1372306787)78:0.2378027602,((Amphimedon_queenslandica_24710:0.7372306086,Ephydatia_muelleri_7728:0.5979909530)99:0.2246757884,(Anemonia_viridis_1669:1.5475189515,Hydra_magnapapillata_8206:1.0104018696)44:0.0355844964)50:0.1023398372)98:0.1861856367,Gorgonia_ventalina_65685:0.6518803927)95:0.0844009902,((((((((Acropora_digitifera_6418:0.0000010001,Acropora_millepora_12853:0.0000029536)100:0.0502556247,Acropora_tenuis_14787:0.0000021045)100:0.2066857145,Montipora_capitata_HIv3___RNAseq.g8840.t1:0.4411710908)100:0.1320567555,((Porites_australiensis_35786:0.0096347522,Porites_lobata_18203:0.0078988340)96:0.0037562016,Peve_00031717:0.0129663516)100:0.2371611978)80:0.0663720293,((protein|evm.model.chromosome_4.119:0.0842985481,(Montastraea_cavernosa_49417:0.0644503631,(Platygyra_carnosus_19926:0.0465942423,Pseudodiploria_strigosa_4324:0.0942786438)100:0.0214618996)100:0.0701725305)96:0.0519499720,Fungia_scutaria_28429:0.0569205358)99:0.0941001555)62:0.0508501420,(Madracis_auretenra_56665:0.1682774233,(((Pocillopora_acuta_HIv2___RNAseq.g16204.t1:0.0000010001,Pocillopora_damicornis_12054:0.0465440595)100:0.0131772209,Pocillopora_meandrina_HIv1___RNAseq.g22731.t1:0.0089771414)100:0.1161465000,(Seriatopora_hystrix_57859:0.0402692089,Stylophora_pistillata_19902:0.0459895021)100:0.0571364992)100:0.1002291520)100:0.1251081244)100:0.3851596216,Anthopleura_elegantissima_47641:0.4065473500)68:0.0638499047,Nematostella_vectensis_2148:0.4543166522)97:0.1600165729);
+
+CONSENSUS TREE
+--------------
+
+Consensus tree is constructed from 1000 bootstrap trees
+Log-likelihood of consensus tree: -58592.959061
+Robinson-Foulds distance between ML tree and consensus tree: 0
+
+Branches with support >0.000000% are kept (extended consensus)
+Branch lengths are optimized by maximum likelihood on original alignment
+Numbers in parentheses are bootstrap supports (%)
+
++----------sp|Q8WYQ5|DGCR8_HUMAN
+|
+|                              +------------sp|O04492|DRB1_ARATH
+|                           +--| (59)
+|                           |  +---------------Monosiga_brevicollis_9040
+|                        +--| (60)
+|                        |  |                 +--Acropora_digitifera_7405
+|                        |  |           +-----| (100)
+|                        |  |           |     |  +--Acropora_millepora_6116
+|                        |  |           |     +--| (81)
+|                        |  |           |        +--Acropora_tenuis_15491
+|                        |  |  +--------| (100)
+|                        |  |  |        |        +--protein|evm.model.chromosome_13.1479
+|                        |  |  |        |     +--| (100)
+|                        |  |  |        |     |  |  +--Montastraea_cavernosa_115239
+|                        |  |  |        |     |  +--| (98)
+|                        |  |  |        |     |     +--Montastraea_faveolata_5718
+|                        |  |  |        |  +--| (100)
+|                        |  |  |        |  |  |     +--Pocillopora_acuta_HIv2___RNAseq.g8391.t1
+|                        |  |  |        |  |  |  +--| (100)
+|                        |  |  |        |  |  |  |  +--Pocillopora_meandrina_HIv1___RNAseq.g6627.t2
+|                        |  |  |        |  |  +--| (100)
+|                        |  |  |        |  |     +--Seriatopora_hystrix_90640
+|                        |  |  |        +--| (61)
+|                        |  |  |           +---Porites_australiensis_44369
+|                        |  +--| (42)
+|                        |     |     +------Anthopleura_elegantissima_45452
+|                        |     |  +--| (100)
+|                        |     |  |  |           +--Fungia_scutaria_58854
+|                        |     |  |  |        +--| (98)
+|                        |     |  |  |        |  +--Pseudodiploria_strigosa_1650
+|                        |     |  |  |     +--| (98)
+|                        |     |  |  |     |  |  +--Madracis_auretenra_48396
+|                        |     |  |  |     |  +--| (100)
+|                        |     |  |  |     |     |  +--Pocillopora_damicornis_4894
+|                        |     |  |  |     |     +--| (100)
+|                        |     |  |  |     |        +--Stylophora_pistillata_5433
+|                        |     |  |  +-----| (100)
+|                        |     |  |        |  +---Montipora_capitata_HIv3___RNAseq.g47961.t1
+|                        |     |  |        +--| (95)
+|                        |     |  |           |  +--Peve_00044098
+|                        |     |  |           +--| (100)
+|                        |     |  |              +--Porites_lobata_17719
+|                        |     +--| (70)
+|                        |        |  +----------------Amphimedon_queenslandica_21637
+|                        |        +--| (71)
+|                        |           |  +-------Ephydatia_muelleri_6597
+|                        |           +--| (95)
+|                        |              +--------Gorgonia_ventalina_46388
+|                     +--| (63)
+|                     |  |   +---------------Hydra_magnapapillata_6561
+|                     |  +---| (67)
+|                     |      +-----------------------Nematostella_vectensis_18156
+|                  +--| (51)
+|                  |  |                                      +--Acropora_hyacinthus_5411
+|                  |  |                              +-------| (100)
+|                  |  |                              |       +--Porites_astreoides_6857
+|                  |  |                         +----| (98)
+|                  |  |                         |    +------Trichoplax_adherens_333
+|                  |  |              +----------| (100)
+|                  |  |              |          +----------------Anemonia_viridis_2289
+|                  |  |           +--| (45)
+|                  |  |           |  +--------------------Pleurobrachia_pileus_4845
+|                  |  |        +--| (61)
+|                  |  |        |  +------------------Montastraea_faveolata_1842
+|                  |  |     +--| (42)
+|                  |  |     |  |           +----------------------Mnemiopsis_leidyi_4769
+|                  |  |     |  |  +--------| (95)
+|                  |  |     |  |  |        +-------------------Pleurobrachia_pileus_1927
+|                  |  |     |  +--| (72)
+|                  |  |     |     +------------------Oscarella_carmela_20971
+|                  |  |  +--| (57)
+|                  |  |  |  +----------------Acropora_hyacinthus_9033
+|                  |  +--| (60)
+|                  |     |  +-----------------Monosiga_brevicollis_3046
+|                  |     +--| (61)
+|                  |        +-----------------------Mnemiopsis_leidyi_8807
+|               +--| (77)
+|               |  |     +-----------------------Acropora_palmata_3542
+|               |  +-----| (63)
+|               |        +--------------------Acropora_palmata_5159
+|           +---| (83)
+|           |   |                  +----------Porites_astreoides_10427
+|           |   +------------------| (100)
+|           |                      +-------Trichoplax_adherens_3817
+|        +--| (64)
+|        |  +---------------------Platygyra_carnosus_37476
+|     +--| (78)
+|     |  +-------------------------------Oscarella_carmela_14446
+|  +--| (98)
+|  |  |     +----------Amphimedon_queenslandica_24710
+|  |  |  +--| (99)
+|  |  |  |  +--------Ephydatia_muelleri_7728
+|  |  +--| (50)
+|  |     |  +----------------------Anemonia_viridis_1669
+|  |     +--| (44)
+|  |        +--------------Hydra_magnapapillata_8206
++--| (95)
+|  +--------Gorgonia_ventalina_65685
+|
+|                         +--Acropora_digitifera_6418
+|                      +--| (100)
+|                      |  +--Acropora_millepora_12853
+|                   +--| (100)
+|                   |  +--Acropora_tenuis_14787
+|                +--| (100)
+|                |  +-----Montipora_capitata_HIv3___RNAseq.g8840.t1
+|             +--| (80)
+|             |  |     +--Porites_australiensis_35786
+|             |  |  +--| (96)
+|             |  |  |  +--Porites_lobata_18203
+|             |  +--| (100)
+|             |     +--Peve_00031717
+|          +--| (62)
+|          |  |     +--protein|evm.model.chromosome_4.119
+|          |  |  +--| (96)
+|          |  |  |  |  +--Montastraea_cavernosa_49417
+|          |  |  |  +--| (100)
+|          |  |  |     |  +--Platygyra_carnosus_19926
+|          |  |  |     +--| (100)
+|          |  |  |        +--Pseudodiploria_strigosa_4324
+|          |  +--| (99)
+|          |     +--Fungia_scutaria_28429
+|     +----| (100)
+|     |    |  +--Madracis_auretenra_56665
+|     |    +--| (100)
+|     |       |        +--Pocillopora_acuta_HIv2___RNAseq.g16204.t1
+|     |       |     +--| (100)
+|     |       |     |  +--Pocillopora_damicornis_12054
+|     |       |  +--| (100)
+|     |       |  |  +--Pocillopora_meandrina_HIv1___RNAseq.g22731.t1
+|     |       +--| (100)
+|     |          |  +--Seriatopora_hystrix_57859
+|     |          +--| (100)
+|     |             +--Stylophora_pistillata_19902
+|  +--| (68)
+|  |  +-----Anthopleura_elegantissima_47641
++--| (97)
+   +-----Nematostella_vectensis_2148
+
+
+Consensus tree in newick format: 
+
+(sp|Q8WYQ5|DGCR8_HUMAN:0.7373178429,((((((((((sp|O04492|DRB1_ARATH:0.9128922714,Monosiga_brevicollis_9040:1.0723655958)59:0.1011496517,(((Acropora_digitifera_7405:0.0000027270,(Acropora_millepora_6116:0.0162041797,Acropora_tenuis_15491:0.0627743671)81:0.0016117854)100:0.4167594335,(((protein|evm.model.chromosome_13.1479:0.0932307034,(Montastraea_cavernosa_115239:0.0473552011,Montastraea_faveolata_5718:0.1350585869)98:0.0497171551)100:0.0737260783,((Pocillopora_acuta_HIv2___RNAseq.g8391.t1:0.0069084800,Pocillopora_meandrina_HIv1___RNAseq.g6627.t2:0.0122128655)100:0.0798900545,Seriatopora_hystrix_90640:0.1531275789)100:0.2007509102)100:0.1226613331,Porites_australiensis_44369:0.2673269065)61:0.0648722027)100:0.6274401378,((Anthopleura_elegantissima_45452:0.5115049370,(((Fungia_scutaria_58854:0.0941824522,Pseudodiploria_strigosa_1650:0.1561313039)98:0.0580745323,(Madracis_auretenra_48396:0.0536161421,(Pocillopora_damicornis_4894:0.2107713213,Stylophora_pistillata_5433:0.0389099279)100:0.1649345408)100:0.1053899567)98:0.1108795662,(Montipora_capitata_HIv3___RNAseq.g47961.t1:0.2869377663,(Peve_00044098:0.0000028701,Porites_lobata_17719:0.0158069046)100:0.1803234239)95:0.0882447747)100:0.4378965183)100:0.2365142794,(Amphimedon_queenslandica_21637:1.1558215684,(Ephydatia_muelleri_6597:0.5356404979,Gorgonia_ventalina_46388:0.6239946628)95:0.2573053259)71:0.1946294679)70:0.2441013298)42:0.0941095164)60:0.1370009419,(Hydra_magnapapillata_6561:1.0912314496,Nematostella_vectensis_18156:1.6351385686)67:0.3091343275)63:0.1159469614,((((((((Acropora_hyacinthus_5411:0.0412997740,Porites_astreoides_6857:0.1488869308)100:0.5678151042,Trichoplax_adherens_333:0.4654999787)98:0.3921903197,Anemonia_viridis_2289:1.1174171520)100:0.7472936972,Pleurobrachia_pileus_4845:1.3959730805)45:0.0000022315,Montastraea_faveolata_1842:1.2521920030)61:0.2114585603,((Mnemiopsis_leidyi_4769:1.5439561707,Pleurobrachia_pileus_1927:1.3588391383)95:0.5905948379,Oscarella_carmela_20971:1.2962434930)72:0.1556341629)42:0.0821548380,Acropora_hyacinthus_9033:1.1283000038)57:0.1626591132,(Monosiga_brevicollis_3046:1.1847690636,Mnemiopsis_leidyi_8807:1.5821090263)61:0.2427886770)60:0.0685299737)51:0.1254880280,(Acropora_palmata_3542:1.6243176441,Acropora_palmata_5159:1.3795042923)63:0.3958090030)77:0.2172872920,(Porites_astreoides_10427:0.7284892395,Trichoplax_adherens_3817:0.5746342265)100:1.2544825092)83:0.3164915247,Platygyra_carnosus_37476:1.4580094659)64:0.1623677139,Oscarella_carmela_14446:2.1369593324)78:0.2378013787,((Amphimedon_queenslandica_24710:0.7371649171,Ephydatia_muelleri_7728:0.5978755969)99:0.2246633834,(Anemonia_viridis_1669:1.5471270838,Hydra_magnapapillata_8206:1.0100599111)44:0.0358230260)50:0.1025679324)98:0.1860144382,Gorgonia_ventalina_65685:0.6517942005)95:0.0844435390,((((((((Acropora_digitifera_6418:0.0000027270,Acropora_millepora_12853:0.0000021779)100:0.0502531062,Acropora_tenuis_14787:0.0000022996)100:0.2066687367,Montipora_capitata_HIv3___RNAseq.g8840.t1:0.4411450478)100:0.1320671557,((Porites_australiensis_35786:0.0096298243,Porites_lobata_18203:0.0078969728)96:0.0037604678,Peve_00031717:0.0129638211)100:0.2371468699)80:0.0663753868,((protein|evm.model.chromosome_4.119:0.0842968812,(Montastraea_cavernosa_49417:0.0644451888,(Platygyra_carnosus_19926:0.0465910506,Pseudodiploria_strigosa_4324:0.0942733135)100:0.0214622681)100:0.0701718619)96:0.0519478109,Fungia_scutaria_28429:0.0569158857)99:0.0940976460)62:0.0508449902,(Madracis_auretenra_56665:0.1682674394,(((Pocillopora_acuta_HIv2___RNAseq.g16204.t1:0.0000027357,Pocillopora_damicornis_12054:0.0465398510)100:0.0131733812,Pocillopora_meandrina_HIv1___RNAseq.g22731.t1:0.0089765881)100:0.1161383808,(Seriatopora_hystrix_57859:0.0402661081,Stylophora_pistillata_19902:0.0459857891)100:0.0571372285)100:0.1002224479)100:0.1251105579)100:0.3851198895,Anthopleura_elegantissima_47641:0.4065456837)68:0.0638530703,Nematostella_vectensis_2148:0.4542887739)97:0.1600021436);
+
+ALISIM COMMAND
+--------------
+To simulate an alignment of the same length as the original alignment, using the tree and model parameters estimated from this analysis, you can use the following command:
+
+--alisim simulated_MSA -t combined_dicer_partner_aligned.fasta.treefile -m "VT+I{0.0100179}+G4{3.43149}" --length 4504
+
+To mimic the alignment used to produce this analysis, i.e. simulate an alignment of the same length as the original alignment, using the tree and model parameters estimated from this analysis *and* copying the same gap positions as the original alignment, you can use the following command:
+
+iqtree -s combined_dicer_partner_aligned.fasta --alisim mimicked_MSA
+
+To simulate any number of alignments in either of the two commandlines above, use the --num-alignments options, for example mimic 100 alignments you would use the command line:
+
+iqtree -s combined_dicer_partner_aligned.fasta --alisim mimicked_MSA --num-alignments 100
+
+For more information on using AliSim, please visit: www.iqtree.org/doc/AliSim
+
+TIME STAMP
+----------
+
+Date and time: Wed Apr 16 19:15:24 2025
+Total CPU time used: 4150.169953 seconds (1h:9m:10s)
+Total wall-clock time used: 842.3488206 seconds (0h:14m:2s)
+
