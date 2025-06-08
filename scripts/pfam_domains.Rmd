@@ -8,8 +8,14 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("pfamAnalyzeR")
+
 library(ggplot2)
 library(tidyverse)
+library(pfamAnalyzeR)
 ```
 
 Load Pfam results 
@@ -73,6 +79,36 @@ df_blast_hyl1 <- df_blast %>%
   filter(Function == "Plant: miRNA microprocessor co-factor / Dicer partner — dsRNA binding protein (HYL1)")
 ```
 
+Group by domains 
+```{r}
+df_blast_hyl1 <- df_blast_hyl1 %>%
+  mutate(domain_group = case_when(
+    grepl("^AAA", target_name) ~ "AAA_family",
+    grepl("DSRM|dsrm", target_name) ~ "DSRM_family",
+    grepl("EGF", target_name) ~ "EGF_like",
+    grepl("Dynein|DHC", target_name) ~ "Dynein_related",
+    grepl("EF-hand", target_name) ~ "EF_hand",
+    grepl("Ribonuclease|Ribonucleas", target_name) ~ "Ribonuclease_family",
+    grepl("DUF", target_name) ~ "DUF_family",
+    is.na(target_name) ~ NA_character_,
+    TRUE ~ target_name
+  ))
+
+df_blast_hyl1 <- df_blast_hyl1 %>%
+  mutate(clan_group = case_when(
+    domain_group == "AAA_family" ~ "AAA+ ATPase superfamily",
+    domain_group == "DSRM_family" ~ "dsRNA-binding superfamily",
+    domain_group == "EGF_like" ~ "EGF-like superfamily",
+    domain_group == "Dynein_related" ~ "AAA+ ATPase superfamily",
+    domain_group == "EF_hand" ~ "EF-hand superfamily",
+    domain_group == "Ribonuclease_family" ~ "Ribonuclease superfamily",
+    domain_group == "DUF_family" ~ "DUF/Unknown",
+    TRUE ~ "Other"
+  ))
+unique(as.character(df_blast_hyl1$clan_group))
+```
+
+
 Select specific domains and plot 
 ```{r}
 # df_clean <- df %>%
@@ -93,7 +129,7 @@ ggplot(df_blast_hyl1) +
     xmax = ali_to,
     ymin = as.numeric(factor(query_name)) - 0.4,
     ymax = as.numeric(factor(query_name)) + 0.4,
-    fill = target_name
+    fill = domain_group
   ), color = "black", size = 0.3) +  # Thinner border lines
   
   # Vertical faceting
@@ -250,4 +286,7 @@ ggplot(domains) +
   theme_minimal() +
   scale_fill_manual(values = unique(domains$Color))
 ```
+
+
+
 
